@@ -259,7 +259,6 @@ public class HoaDonActivity extends AppCompatActivity {
                 getTheme().obtainStyledAttributes(new int[] { android.R.attr.actionBarSize });
         int actionBarSize = (int) styledAttributes.getDimension(0, 0);
         styledAttributes.recycle();
-
         //Tạo Drawable mới bằng cách thu/phóng
         Drawable drawable= getResources().getDrawable(R.drawable.icon_hoa_don);
         Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
@@ -269,8 +268,7 @@ public class HoaDonActivity extends AppCompatActivity {
         //Cài đặt tiêu đề, icon cho actionbar
         getSupportActionBar().setTitle("HOÁ ĐƠN");
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setLogo(newdrawable);
-        getSupportActionBar().setDisplayUseLogoEnabled(true);
+
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
 

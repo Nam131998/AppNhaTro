@@ -73,7 +73,7 @@ public class PhongTroActivity extends AppCompatActivity {
         //Cài đặt tiêu đề, icon cho actionbar
         getSupportActionBar().setTitle("PHÒNG TRỌ");
         getSupportActionBar().setDisplayShowHomeEnabled(true);
-        getSupportActionBar().setLogo(newdrawable);
+//        getSupportActionBar().setLogo(newdrawable);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }

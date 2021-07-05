@@ -78,9 +78,9 @@
             android:id="@+id/tvSoNuoc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="18dp"
+            android:ems="8"
             android:text="40x6.000=190.0000"
-            android:ems="8"/>
+            android:textSize="18dp" />
     </LinearLayout>
 
     <LinearLayout

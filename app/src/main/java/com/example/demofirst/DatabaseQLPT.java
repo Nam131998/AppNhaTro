@@ -9,12 +9,14 @@ import android.widget.ArrayAdapter;
 
 import com.example.demofirst.base.DichVu;
 import com.example.demofirst.base.PhongTro;
+import com.example.demofirst.base.TaiKhoan;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class DatabaseQLPT extends SQLiteOpenHelper {
     public static final String DATABASE_NAME="qlphongtro.db";
+
 
     public static final String TABLE_NAME1="PHONGTRO";
     public static final String COL_1="ID";
@@ -55,6 +57,11 @@ public class DatabaseQLPT extends SQLiteOpenHelper {
     public static final String TB5_COL_8="NGAY_LAP";
     public static final String TB5_COL_9="TINH_TRANG";
 
+    public static final String TABLE_NAME4="TAIKHOAN";
+    public static final String TB4_COL_1="ID";
+    public static final String TB4_COL_2="tentaikhoan";
+    public static final String TB4_COL_3="matkhau";
+
     public DatabaseQLPT(Context context) {
         super(context, DATABASE_NAME, null, 1);
     }
@@ -65,7 +72,7 @@ public class DatabaseQLPT extends SQLiteOpenHelper {
         db.execSQL("create table "+TABLE_NAME2+" (MACP INTEGER PRIMARY KEY AUTOINCREMENT,TEN_CP TEXT,QUI_CACH TEXT,DON_GIA INTEGER)");
         db.execSQL("create table "+TABLE_NAME3+" (ID INTEGER PRIMARY KEY AUTOINCREMENT,TEN_KH TEXT,GIOI_TINH TEXT,NAM_SINH TEXT,CMND TEXT,NGAY_CAP DATE,SDT TEXT,PHONG_O INTEGER,HINH_ANH TEXT)");
         db.execSQL("create table "+TABLE_NAME5+" (ID INTEGER PRIMARY KEY AUTOINCREMENT,THANG INTERGER,PHONG TEXT,SO_DIEN INTEGER,SO_NUOC INTEGER,CHI_PHI_KHAC INTEGER,THANH_TIEN INTEGER,NGAY_LAP DATE,TINH_TRANG TEXT)");
-
+        db.execSQL("create table "+TABLE_NAME4+" (ID INTEGER PRIMARY KEY AUTOINCREMENT,tentaikhoan TEXT,matkhau TEXT)");
     }
 
     @Override
@@ -73,9 +80,32 @@ public class DatabaseQLPT extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS "+TABLE_NAME1);
         db.execSQL("DROP TABLE IF EXISTS "+TABLE_NAME2);
         db.execSQL("DROP TABLE IF EXISTS "+TABLE_NAME3);
+        db.execSQL("DROP TABLE IF EXISTS "+TABLE_NAME4);
         db.execSQL("DROP TABLE IF EXISTS "+TABLE_NAME5);
         onCreate(db);
     }
+
+    public Cursor getData(){
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor res =  db.rawQuery( "select * from "+TABLE_NAME4 , null );
+        return res;
+    }
+
+    public void AddTaiKhoan(TaiKhoan taiKhoan){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        //không thể lưu trực tiếp xuống insert nên thông qua contentvalues
+        ContentValues values = new ContentValues();
+        values.put(TB4_COL_2,taiKhoan.getmTenTaiKhoan());
+        values.put(TB4_COL_3,taiKhoan.getmMatKhau());
+
+
+        db.insert(TABLE_NAME4,null,values);
+        //đóng lại db cho an toàn
+        db.close();
+        //Log.e("Add Tai Khoan ","thành công");
+    }
+
 
     public boolean themPhongTro(String ten,String sc,String dt,String gt,String ttk,String sd,String sn){
         SQLiteDatabase db=this.getWritableDatabase();
